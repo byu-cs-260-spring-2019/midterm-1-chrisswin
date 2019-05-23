@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>GoodRead App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="jumbotron jumbotron-fluid color-dark bg-dark" style="color:white; padding-left: 10px;">
+      <h3>Find Your Favorite Books</h3>
+    </div>
+    <div class="row" id="app">
+      <div class="col-sm-6">
+        <h3>Search Here</h3>
+        <form v-on:submit.prevent="searchBooks">
+          <label for="text">Search Books:</label>
+          <input type="text" style="width: 375px;">
+        </form>
+        <p> {{ criteria }}</p>
+        <br>
+        <br>
+        <h3>Choose Your Favorite Books</h3>
+        <ul>
+          <li v-for="value in books">
+              <input type="checkbox" v-on:submit.prevent="favoriteItem"/>
+              <img v-bind:src="{coverImage}">
+              <h6 v-bind:class>{{ item.title }}</h6>
+              <p v-bind:class="{author: item.author}"><small> {{ item.author }}</small></p>
+              <p v-bind:class=""><small> {{ item.publishDate }}</small></p>
+              <button v-on:submit.prevent="unfavoriteItem">-</button>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h3>Favorites <small>(check box to unfavorite)</small></h3>
+        <ul>
+          <li v-for="item in favoriteBooks" v-if="favorite">
+              <img v-bind:src="{coverImage}">
+              <h6 v-bind:class>{{ item.title }}</h6>
+              <p v-bind:class=""><small> {{ item.author }}</small></p>
+              <p v-bind:class=""><small> {{ item.publishDate }}</small></p>
+              <button v-on:submit.prevent="unfavoriteItem">-</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
